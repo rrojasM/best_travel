@@ -15,8 +15,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @SpringBootApplication
-@Slf4j
-public class BestTravelApplication implements CommandLineRunner {
+//@Slf4j
+public class BestTravelApplication { //implements CommandLineRunner {
+
+	/*
 
 	private final HotelRepository hotelRepository;
 	private final FlyRepository flyRepository;
@@ -40,14 +42,16 @@ public class BestTravelApplication implements CommandLineRunner {
 		this.tourRepository = tourRepository;
 		this.customerRepository = customerRepository;
 	}
+	 */
 
 	public static void main(String[] args) {
 		SpringApplication.run(BestTravelApplication.class, args);
 	}
 
+	/*
 	@Override
 	public void run(String... args) throws Exception {
-		/**var fly = flyRepository.findById(15L).get();
+		var fly = flyRepository.findById(15L).get();
 		var hotel = hotelRepository.findById(7L).get();
 		var ticket = ticketRepository.findById(UUID.fromString("32345678-1234-5678-4234-567812345678")).get();
 		var reservation = reservationRepository.findById(UUID.fromString("12345678-1234-5678-1234-567812345678")).get();
@@ -58,29 +62,29 @@ public class BestTravelApplication implements CommandLineRunner {
 		log.info(String.valueOf(ticket));
 		log.info(String.valueOf(reservation));
 		log.info(String.valueOf(customer));
-		 **/
 
-		//this.flyRepository.selectLessPrice(BigDecimal.valueOf(20)).forEach(f -> System.out.println(f));
-		//this.flyRepository.selectBetweenPrice(BigDecimal.valueOf(10), BigDecimal.valueOf(15)).forEach(f->System.out.println(f));
-		//this.flyRepository.selectOriginDestiny("Grecia", "Mexico").forEach(System.out::println);
 
-		//var fly = flyRepository.findById(1L).get();
-		//System.out.println(fly);
+		this.flyRepository.selectLessPrice(BigDecimal.valueOf(20)).forEach(f -> System.out.println(f));
+		this.flyRepository.selectBetweenPrice(BigDecimal.valueOf(10), BigDecimal.valueOf(15)).forEach(f->System.out.println(f));
+		this.flyRepository.selectOriginDestiny("Grecia", "Mexico").forEach(System.out::println);
 
-		//fly.getTickets().forEach(t -> System.out.println(t));
+		var fly = flyRepository.findById(1L).get();
+		System.out.println(fly);
+
+		fly.getTickets().forEach(t -> System.out.println(t));
 
 
 		//Buscar por ticket id
-		//var fly = flyRepository.findByTicketId(UUID.fromString("22345678-1234-5678-3235-567812345678"));
-		//System.out.println(fly);
+		var fly = flyRepository.findByTicketId(UUID.fromString("22345678-1234-5678-3235-567812345678"));
+		System.out.println(fly);
 
 
-		//hotelRepository.findByPriceLessThan(BigDecimal.valueOf(100)).forEach(System.out::println);
-		//hotelRepository.findByPriceIsBetween(BigDecimal.valueOf(50), BigDecimal.valueOf(150)).forEach(System.out::println);
-		//hotelRepository.findByRatingGreaterThan(3).forEach(System.out::println);
+		hotelRepository.findByPriceLessThan(BigDecimal.valueOf(100)).forEach(System.out::println);
+		hotelRepository.findByPriceIsBetween(BigDecimal.valueOf(50), BigDecimal.valueOf(150)).forEach(System.out::println);
+		hotelRepository.findByRatingGreaterThan(3).forEach(System.out::println);
 
-		//var hotel = hotelRepository.findByReservationId(UUID.fromString("12345678-1234-5678-1234-567812345678"));
-		//System.out.println(hotel);
+		var hotel = hotelRepository.findByReservationId(UUID.fromString("12345678-1234-5678-1234-567812345678"));
+		System.out.println(hotel);
 
 		var customer = customerRepository.findById("VIKI771012HMCRG093").orElseThrow();
 
@@ -97,8 +101,8 @@ public class BestTravelApplication implements CommandLineRunner {
 		var ticket = TicketEntity.builder()
 				.id(UUID.randomUUID())
 				.price(fly.getPrice().multiply(BigDecimal.TEN))
-				.arrivalDate(LocalDate.now())
-				.departureDate(LocalDate.now())
+				.arrivalDate(LocalDateTime.now())
+				.departureDate(LocalDateTime.now())
 				.purchaseDate(LocalDate.now())
 				.customer(customer)
 				.tour(tour)
@@ -129,4 +133,5 @@ public class BestTravelApplication implements CommandLineRunner {
 		this.tourRepository.deleteById(tourSaved.getId());
 
 	}
+	**/
 }
