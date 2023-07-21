@@ -9,6 +9,7 @@ import com.debuggeando_ideas.best_travel.domain.repositories.CustomerRepository;
 import com.debuggeando_ideas.best_travel.domain.repositories.HotelRepository;
 import com.debuggeando_ideas.best_travel.domain.repositories.ReservationRepository;
 import com.debuggeando_ideas.best_travel.infraestructure.abstract_services.IReservationService;
+import com.debuggeando_ideas.best_travel.infraestructure.helpers.CustomerHelper;
 import com.debuggeando_ideas.best_travel.util.BestTravelUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,7 @@ public class ReservationService implements IReservationService {
     private final CustomerRepository customerRepository;
     private final HotelRepository hotelRepository;
     private final ReservationRepository reservationRepository;
+    private final CustomerHelper customerHelper;
     @Override
     public ReservationResponse create(ReservationRequest request) {
         var hotel = hotelRepository.findById(request.getIdHotel()).orElseThrow();
@@ -45,6 +47,7 @@ public class ReservationService implements IReservationService {
                 .price(hotel.getPrice().add(hotel.getPrice().multiply(charges_price_percentage)))
                 .build();
         var reservationPersisted = reservationRepository.save(reservationToPersist);
+        this.customerHelper.incrase(customer.getDni(), ReservationService.class);
 
         log.info("Ticket saved with id : {}", reservationPersisted.getId());
         return this.entityToResponse(reservationPersisted);
@@ -98,5 +101,5 @@ public class ReservationService implements IReservationService {
         return response;
     }
 
-    private static final BigDecimal charges_price_percentage = BigDecimal.valueOf(0.20);
+    public static final BigDecimal charges_price_percentage = BigDecimal.valueOf(0.20);
 }
