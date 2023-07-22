@@ -1,8 +1,13 @@
 package com.debuggeando_ideas.best_travel.api.controllers;
 
 import com.debuggeando_ideas.best_travel.api.models.request.TicketRequest;
+import com.debuggeando_ideas.best_travel.api.models.response.ErrorsResponse;
 import com.debuggeando_ideas.best_travel.api.models.response.TicketResponse;
 import com.debuggeando_ideas.best_travel.infraestructure.abstract_services.ITicketService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +22,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "/ticket")
 @AllArgsConstructor
+@Tag(name = "Ticket")
 public class TicketController {
     private  final ITicketService ticketService;
-
+    @ApiResponse(
+            responseCode="400",
+            description = "When the request have a field invalid we response this",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResponse.class))})
     @PostMapping
     public ResponseEntity<TicketResponse>post(@RequestBody TicketRequest request){
         return ResponseEntity.ok(ticketService.create(request));
