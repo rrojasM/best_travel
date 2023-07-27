@@ -10,6 +10,7 @@ import com.debuggeando_ideas.best_travel.domain.repositories.TicketRepository;
 import com.debuggeando_ideas.best_travel.infraestructure.abstract_services.ITicketService;
 import com.debuggeando_ideas.best_travel.infraestructure.helpers.BlackListHelper;
 import com.debuggeando_ideas.best_travel.infraestructure.helpers.CustomerHelper;
+import com.debuggeando_ideas.best_travel.infraestructure.helpers.EmailHelper;
 import com.debuggeando_ideas.best_travel.util.BestTravelUtil;
 import com.debuggeando_ideas.best_travel.util.enums.Tables;
 import com.debuggeando_ideas.best_travel.util.exceptions.IdNotFoundException;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Transactional
@@ -35,6 +37,7 @@ public class TicketService implements ITicketService {
     private final TicketRepository ticketRepository;
     private final CustomerHelper customerHelper;
     private BlackListHelper blackListHelper;
+    private final EmailHelper emailHelper;
 
     @Override
     public TicketResponse create(TicketRequest request) {
@@ -54,7 +57,7 @@ public class TicketService implements ITicketService {
 
         var ticketPersisted = this.ticketRepository.save(ticketToPersist);
         this.customerHelper.incrase(customer.getDni(), TicketService.class);
-
+        if(Objects.nonNull(request.getEmail())) this.emailHelper.sendMail(request.getEmail(),customer.getFullName(), Tables.ticket.name());
         log.info("Ticket saved with id : {}", ticketPersisted.getId());
 
         return this.entityToResponse(ticketPersisted);

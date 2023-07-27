@@ -12,6 +12,7 @@ import com.debuggeando_ideas.best_travel.infraestructure.abstract_services.IRese
 import com.debuggeando_ideas.best_travel.infraestructure.helpers.ApiCurrencyConnectorHelper;
 import com.debuggeando_ideas.best_travel.infraestructure.helpers.BlackListHelper;
 import com.debuggeando_ideas.best_travel.infraestructure.helpers.CustomerHelper;
+import com.debuggeando_ideas.best_travel.infraestructure.helpers.EmailHelper;
 import com.debuggeando_ideas.best_travel.util.BestTravelUtil;
 import com.debuggeando_ideas.best_travel.util.enums.Tables;
 import com.debuggeando_ideas.best_travel.util.exceptions.IdNotFoundException;
@@ -25,6 +26,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.Objects;
 import java.util.UUID;
 @Transactional
 @Service
@@ -38,6 +40,7 @@ public class ReservationService implements IReservationService {
     private final CustomerHelper customerHelper;
     private final BlackListHelper blackListHelper;
     private final ApiCurrencyConnectorHelper currencyConnectorHelper;
+    private final EmailHelper emailHelper;
     @Override
     public ReservationResponse create(ReservationRequest request) {
 
@@ -58,6 +61,7 @@ public class ReservationService implements IReservationService {
         var reservationPersisted = reservationRepository.save(reservationToPersist);
         this.customerHelper.incrase(customer.getDni(), ReservationService.class);
 
+        if(Objects.nonNull(request.getEmail())) this.emailHelper.sendMail(request.getEmail(),customer.getFullName(), Tables.reservation.name());
         log.info("Ticket saved with id : {}", reservationPersisted.getId());
         return this.entityToResponse(reservationPersisted);
     }
