@@ -1,5 +1,4 @@
 package com.debuggeando_ideas.best_travel.util;
-
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -16,4 +15,5 @@ public class BestTravelUtil {
         var now = LocalDateTime.now();
         return now.plusHours(randomHours);
     }
+
 }
