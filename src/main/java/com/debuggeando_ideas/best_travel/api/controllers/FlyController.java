@@ -10,8 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "/fly")
@@ -19,6 +18,8 @@ import java.util.Set;
 @Tag(name = "Fly")
 public class FlyController {
     private final IFlyService flyService;
+    private IFlyService ticketService;
+
     @GetMapping
     public ResponseEntity<Page<FlyResponse>> getAll(@RequestParam Integer page, @RequestParam Integer size, @RequestHeader(required = false) SortType sortType){
         if (Objects.isNull(sortType)) sortType = SortType.NONE;
@@ -42,5 +43,13 @@ public class FlyController {
     public ResponseEntity<Set<FlyResponse>> getOriginDestiny(@RequestParam String origin, @RequestParam String destiny){
         var response = this.flyService.readByOriginDestiny(origin, destiny);
         return  response.isEmpty()? ResponseEntity.noContent().build(): ResponseEntity.ok(response);
+    }
+
+    @GetMapping(path = "/get_price")
+    public ResponseEntity<Map<String, BigDecimal>> getFlyPrice(
+            @RequestParam Long flyId,
+            @RequestHeader(required = false) Currency currency) {
+        if (Objects.isNull(currency)) currency = Currency.getInstance("USD");
+        return ResponseEntity.ok(Collections.singletonMap("flyPrice", this.ticketService.findPrice(flyId, currency)));
     }
 }
