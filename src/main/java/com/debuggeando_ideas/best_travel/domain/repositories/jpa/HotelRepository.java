@@ -1,6 +1,6 @@
-package com.debuggeando_ideas.best_travel.domain.repositories;
+package com.debuggeando_ideas.best_travel.domain.repositories.jpa;
 
-import com.debuggeando_ideas.best_travel.domain.entities.HotelEntity;
+import com.debuggeando_ideas.best_travel.domain.entities.jpa.HotelEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

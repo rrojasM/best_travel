@@ -1,4 +1,4 @@
-package com.debuggeando_ideas.best_travel.domain.entities;
+package com.debuggeando_ideas.best_travel.domain.entities.jpa;
 
 import com.debuggeando_ideas.best_travel.util.enums.AeroLine;
 import jakarta.persistence.*;

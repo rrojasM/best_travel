@@ -1,23 +1,14 @@
 package com.debuggeando_ideas.best_travel;
 
-import com.debuggeando_ideas.best_travel.domain.entities.ReservationEntity;
-import com.debuggeando_ideas.best_travel.domain.entities.TicketEntity;
-import com.debuggeando_ideas.best_travel.domain.entities.TourEntity;
-import com.debuggeando_ideas.best_travel.domain.repositories.*;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @SpringBootApplication
 //@Slf4j
 public class BestTravelApplication { //implements CommandLineRunner {
 
+	//Autowired
+	//private AppUserRepository appUserRepository;
 	/*
 
 	private final HotelRepository hotelRepository;
@@ -47,6 +38,14 @@ public class BestTravelApplication { //implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(BestTravelApplication.class, args);
 	}
+
+	/*
+	@Override
+	public void run(String... args) throws Exception{
+		this.appUserRepository.findAll().forEach(System.out::println);
+		System.out.print(this.appUserRepository.findByUsername("ragnar777").orElseThrow());
+	}
+	*/
 
 	/*
 	@Override

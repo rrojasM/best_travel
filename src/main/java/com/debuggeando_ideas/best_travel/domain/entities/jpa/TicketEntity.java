@@ -1,4 +1,4 @@
-package com.debuggeando_ideas.best_travel.domain.entities;
+package com.debuggeando_ideas.best_travel.domain.entities.jpa;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

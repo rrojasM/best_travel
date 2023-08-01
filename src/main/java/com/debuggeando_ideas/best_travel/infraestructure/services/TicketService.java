@@ -3,10 +3,10 @@ package com.debuggeando_ideas.best_travel.infraestructure.services;
 import com.debuggeando_ideas.best_travel.api.models.request.TicketRequest;
 import com.debuggeando_ideas.best_travel.api.models.response.FlyResponse;
 import com.debuggeando_ideas.best_travel.api.models.response.TicketResponse;
-import com.debuggeando_ideas.best_travel.domain.entities.TicketEntity;
-import com.debuggeando_ideas.best_travel.domain.repositories.CustomerRepository;
-import com.debuggeando_ideas.best_travel.domain.repositories.FlyRepository;
-import com.debuggeando_ideas.best_travel.domain.repositories.TicketRepository;
+import com.debuggeando_ideas.best_travel.domain.entities.jpa.TicketEntity;
+import com.debuggeando_ideas.best_travel.domain.repositories.jpa.CustomerRepository;
+import com.debuggeando_ideas.best_travel.domain.repositories.jpa.FlyRepository;
+import com.debuggeando_ideas.best_travel.domain.repositories.jpa.TicketRepository;
 import com.debuggeando_ideas.best_travel.infraestructure.abstract_services.ITicketService;
 import com.debuggeando_ideas.best_travel.infraestructure.helpers.BlackListHelper;
 import com.debuggeando_ideas.best_travel.infraestructure.helpers.CustomerHelper;
@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 

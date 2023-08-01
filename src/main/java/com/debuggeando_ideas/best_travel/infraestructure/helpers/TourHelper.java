@@ -1,14 +1,13 @@
 package com.debuggeando_ideas.best_travel.infraestructure.helpers;
 
-import com.debuggeando_ideas.best_travel.domain.entities.*;
-import com.debuggeando_ideas.best_travel.domain.repositories.ReservationRepository;
-import com.debuggeando_ideas.best_travel.domain.repositories.TicketRepository;
+import com.debuggeando_ideas.best_travel.domain.entities.jpa.*;
+import com.debuggeando_ideas.best_travel.domain.repositories.jpa.ReservationRepository;
+import com.debuggeando_ideas.best_travel.domain.repositories.jpa.TicketRepository;
 import com.debuggeando_ideas.best_travel.infraestructure.services.ReservationService;
 import com.debuggeando_ideas.best_travel.infraestructure.services.TicketService;
 import com.debuggeando_ideas.best_travel.util.BestTravelUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
